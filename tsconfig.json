@@ -1,26 +1,29 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+	"compilerOptions": {
+		"target": "ES6",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowImportingTsExtensions": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"noEmit": true,
+		"jsx": "preserve",
+		"sourceMap": true,
+		"incremental": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./*"],
+			"@/src/*": ["./src/*"],
+			"@/components/*": ["./src/components/*"],
+			"@/theme/*": ["./src/theme/*"]
+		}
+	},
+	"include": ["src/**/*", "**/*.ts", "**/*.tsx", "@types/**/*"],
+	"exclude": ["node_modules", "build", ".vscode", ".yarn"]
 }
