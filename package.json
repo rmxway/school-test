@@ -1,6 +1,7 @@
 {
 	"name": "school-test",
 	"version": "0.1.0",
+    "homepage": "https://rmxway.github.io/shcool-test",
 	"private": true,
 	"scripts": {
 		"predeploy": "npm run build",
