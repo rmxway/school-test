@@ -3,10 +3,10 @@ import { DefaultTheme } from 'styled-components';
 
 import { Colors, Gradients } from '@/@types/styled';
 
-const primary = '#007536';
-const success = '#4E9600';
-const danger = '#A62500';
-const label = '#034569';
+const primary = '#8541d2';
+const success = '#1abc40';
+const danger = '#d93d12';
+const label = '#21ca97';
 
 const colors: Colors = {
 	primary,
@@ -32,7 +32,7 @@ export const createGradient = (deg: string, color1: string, long1: string, color
 
 const gradients: Gradients = {
 	main: (deg = '150deg') => createGradient(deg, '#e8ffb3', '0%', success, '60%'),
-	dark: (deg = '150deg') => createGradient(deg, success, '0%', label, '60%'),
+	dark: (deg = '150deg') => createGradient(deg, colors.dark, '0%', primary, '60%'),
 	softDark: (deg = '150deg') => createGradient(deg, success, '0%', '#fff', '40%'),
 };
 
