@@ -16,5 +16,5 @@ export interface Question {
 
 export interface DataAnswer {
 	question: string;
-	answer: unknown;
+	answer: string | string[];
 }

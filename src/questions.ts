@@ -73,4 +73,16 @@ export const questions: Question[] = [
 			{ id: '4', title: 'Ember' },
 		],
 	},
+	{
+		id: 'a6',
+		question:
+			'Какой метод массива в JavaScript немедленно прерывает выполнение текущей операции и возвращает значение?',
+		type: 'radio',
+		answers: [
+			{ id: '1', title: 'forEach' },
+			{ id: '2', title: 'map' },
+			{ id: '3', title: 'filter' },
+			{ id: '4', title: 'find', correct: true },
+		],
+	},
 ];

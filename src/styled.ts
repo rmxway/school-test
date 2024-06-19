@@ -6,3 +6,13 @@ export const LastInfo = styled.pre`
 	max-width: 100%;
 	overflow-y: auto;
 `;
+
+export const List = styled.ul`
+    margin: 0;
+    margin-bottom: 40px;
+    padding-left: 20px;
+
+    li {
+        margin-bottom: 10px;
+    }
+`;

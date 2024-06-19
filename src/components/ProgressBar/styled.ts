@@ -14,5 +14,6 @@ export const ProgressItem = styled.div<{ $active?: boolean; $future: boolean }>`
 		height: 10px;
 		border-radius: ${theme.radius.borderRadius};
 		margin: 0 4px 4px 0;
+        transition: all 0.2s;
 	`}
 `;

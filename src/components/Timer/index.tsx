@@ -3,17 +3,27 @@ import { TimerWrapper } from './styled';
 
 interface TimerProps {
 	start?: number;
+	stop: () => void;
 }
 
-export const Timer: FC<TimerProps> = ({ start = 20 }) => {
+export const Timer: FC<TimerProps> = ({ start = 20, stop }) => {
 	const [lost, setLost] = useState(`${start}:00`);
+	const [alarm, setAlarm] = useState(false);
 	const date = start * 1000 * 60 + 1000;
 	const deadline = Date.now() + date;
 
 	const getTime = () => {
-		const time = new Date(deadline - Date.now());
+		const time = deadline - Date.now();
+		setLost(new Date(time).toLocaleTimeString('it-IT', { minute: '2-digit', second: 'numeric' }));
 
-		setLost(time.toLocaleTimeString('it-IT', { minute: '2-digit', second: 'numeric' }));
+		if (Math.floor(time / 1000) <= 60) {
+			setAlarm(true);
+		}
+
+		if (Math.floor(time / 1000) <= 0) {
+			stop();
+			return;
+		}
 	};
 
 	useEffect(() => {
@@ -22,6 +32,6 @@ export const Timer: FC<TimerProps> = ({ start = 20 }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return <TimerWrapper>{lost}</TimerWrapper>;
+	return <TimerWrapper $alarm={alarm}>{lost}</TimerWrapper>;
 };
 export default Timer;

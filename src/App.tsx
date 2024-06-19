@@ -6,12 +6,13 @@ import { Step, ProgressBar, Timer } from './components';
 import { ThemeProvider } from 'styled-components';
 import { defaultTheme } from './theme';
 import { Button } from './components/ui';
-import { LastInfo } from './styled';
+import { List } from './styled';
 import { DataAnswer } from '@/@types/types';
+import { declOfNum } from './helpers/declOfNum';
 
 const progressItems = questions.map((item) => item.id);
 const newData: DataAnswer[] = [];
-const limit = 1;
+const limit = 10;
 
 function App() {
 	const [step, setStep] = useState(0);
@@ -33,19 +34,34 @@ function App() {
 				{isStart && (
 					<>
 						<h2>Добро пожаловать в тестовый блок по Frontend</h2>
-						<div>Что бы начать тестирование, нажмите "Начать".</div>
-						<div>Обратите внимание что для тестирование выделено {limit} минут.</div>
+						<div>Что бы начать тестирование, нажмите на кнопку.</div>
+						<div>
+							Обратите внимание что для тестирование выделено {limit}{' '}
+							{declOfNum(limit, ['минута', 'минуты', 'минут'])}.
+						</div>
 						<br />
-						<Button $white onClick={() => setIsStart(false)}>
-							Начать
+						<Button $primary onClick={() => setIsStart(false)}>
+							Начать тест
 						</Button>
 					</>
 				)}
 				{!isStart && isLastStep && (
 					<>
 						<h2>Тестирование завершено!</h2>
-						<div>Ваши ответы:</div>
-						<LastInfo>{JSON.stringify(newData, null, 2)}</LastInfo>
+						<div>{newData.length ? 'Ваши ответы:' : 'Вы не ответили ни на один вопрос.'}</div>
+						<br />
+						{newData.length ? (
+							<List>
+								{newData.map((item) => (
+									<li>
+										<div>Вопрос: {item.question}</div>
+										<div>
+											Ответ: {Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}
+										</div>
+									</li>
+								))}
+							</List>
+						) : null}
 						<Button $white onClick={resetTest}>
 							Начать заново
 						</Button>
@@ -53,7 +69,7 @@ function App() {
 				)}
 				{!isStart && step < questions.length && (
 					<>
-						<Timer start={limit} />
+						<Timer start={limit} stop={() => setStep(questions.length)} />
 						<h2>Тестирование</h2>
 						<ProgressBar items={progressItems} active={progressItems[step]} step={step} />
 						<Step {...questions[step]} data={newData} onNext={() => setStep((prev) => prev + 1)} />

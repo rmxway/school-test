@@ -5,6 +5,7 @@ interface CommonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	$w100?: boolean;
 	$inactive?: boolean;
 	$margins?: boolean;
+	$center?: boolean;
 }
 
 export interface Props extends CommonProps {
@@ -39,7 +40,7 @@ const mixinButton = ($background = '#fff', $color = '#fff') => css`
 `;
 
 export const ButtonStyle = styled.button<Props>`
-	${({ theme, $margins, $dark, $danger, $inactive, $primary, $success, $w100, $white }) => css`
+	${({ theme, $margins, $center, $dark, $danger, $inactive, $primary, $success, $w100, $white }) => css`
 		appearance: none;
 		border: 1px solid #aaa;
 		background: none;
@@ -57,6 +58,11 @@ export const ButtonStyle = styled.button<Props>`
 		css`
 			margin-bottom: 10px;
 			margin-right: 10px;
+		`}
+
+		${$center &&
+		css`
+			margin: 0 auto;
 		`}
 
 		cursor: pointer;
