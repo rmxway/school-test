@@ -9,7 +9,7 @@ interface TimerProps {
 
 export const Timer: FC<TimerProps> = ({ start = 20, stop }) => {
 	const time = useRef(0);
-	const commonTime = start * 1000 * 60 + 1000;
+	const commonTime = start * 1000 * 60;
 	const stampTime = getStorageTimer();
 	time.current = commonTime - (Date.now() - stampTime);
 
