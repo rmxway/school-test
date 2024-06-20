@@ -12,7 +12,7 @@ export const Step: FC<Question & { onNext: () => void; data: DataAnswer[] }> = (
 	type,
 	answers,
 	onNext,
-	data: newData,
+	data,
 }) => {
 	const {
 		register,
@@ -20,10 +20,10 @@ export const Step: FC<Question & { onNext: () => void; data: DataAnswer[] }> = (
 		formState: { isValid },
 	} = useForm();
 
-	const onSubmit: SubmitHandler<Record<string, string>> = (data) => {
-		newData.push({
+	const onSubmit: SubmitHandler<Record<string, string>> = (formData) => {
+		data.push({
 			question,
-			answer: data[id],
+			answer: formData[id],
 		});
 		onNext();
 	};

@@ -1,5 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { TimerWrapper } from './styled';
+import { getStorageTimer } from '@/src/helpers/storage';
 
 interface TimerProps {
 	start?: number;
@@ -7,20 +8,24 @@ interface TimerProps {
 }
 
 export const Timer: FC<TimerProps> = ({ start = 20, stop }) => {
-	const [lost, setLost] = useState(`${start}:00`);
+	const time = useRef(0);
+	const commonTime = start * 1000 * 60 + 1000;
+	const stampTime = getStorageTimer();
+	time.current = commonTime - (Date.now() - stampTime);
+
+	const firstSecond = new Date(time.current).toLocaleTimeString('it-IT', { minute: '2-digit', second: 'numeric' });
+	const [lost, setLost] = useState(firstSecond);
 	const [alarm, setAlarm] = useState(false);
-	const date = start * 1000 * 60 + 1000;
-	const deadline = Date.now() + date;
 
 	const getTime = () => {
-		const time = deadline - Date.now();
-		setLost(new Date(time).toLocaleTimeString('it-IT', { minute: '2-digit', second: 'numeric' }));
+		time.current = commonTime - (Date.now() - stampTime);
+		setLost(new Date(time.current).toLocaleTimeString('it-IT', { minute: '2-digit', second: 'numeric' }));
 
-		if (Math.floor(time / 1000) <= 60) {
+		if (Math.floor(time.current / 1000) <= 60) {
 			setAlarm(true);
 		}
 
-		if (Math.floor(time / 1000) <= 0) {
+		if (Math.floor(time.current / 1000) <= 0) {
 			stop();
 			return;
 		}
@@ -28,7 +33,10 @@ export const Timer: FC<TimerProps> = ({ start = 20, stop }) => {
 
 	useEffect(() => {
 		const timer = setInterval(() => getTime(), 1000);
-		return () => clearInterval(timer);
+
+		return function () {
+			clearInterval(timer);
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

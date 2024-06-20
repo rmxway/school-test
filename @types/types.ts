@@ -18,3 +18,8 @@ export interface DataAnswer {
 	question: string;
 	answer: string | string[];
 }
+
+export interface AppData {
+	step: number;
+	data: DataAnswer[];
+}
