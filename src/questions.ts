@@ -85,4 +85,28 @@ export const questions: Question[] = [
 			{ id: '4', title: 'find', correct: true },
 		],
 	},
+	{
+		id: 'a7',
+		question:
+			'Какое значение свойства position в CSS определяет координаты элемента относительно его начальной позиции?',
+		type: 'radio',
+		answers: [
+			{ id: '1', title: 'absolute' },
+			{ id: '2', title: 'fixed' },
+			{ id: '3', title: 'relative', correct: true },
+			{ id: '4', title: 'sticky' },
+		],
+	},
+	{
+		id: 'a8',
+		question:
+			'Какой хук в React используется для выполнения побочного эффекта после каждого рендеринга компонента?',
+		type: 'radio',
+		answers: [
+			{ id: '1', title: 'useReducer' },
+			{ id: '2', title: 'useEffect', correct: true },
+			{ id: '3', title: 'useRef' },
+			{ id: '4', title: 'useState' },
+		],
+	},
 ];
